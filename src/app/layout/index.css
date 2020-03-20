@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+.info {
+  margin-top: 1em;
+  font-family: "Montserrat", sans-serif;
+}
+.nameDetail {
+  font-size: 30px;
+  margin: 0.5em 0;
+}
+.price {
+  font-size: 20px;
+  color: #999;
+}
+.info-text {
+  margin-left: 5em;
+}
+.des {
+  font-size: 20px;
+  margin-bottom: 2em;
+}
+.checkout-item {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #e6e6e6;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.checkout-item img {
+  width: 45px;
+  min-width: 40px;
+  max-height: 70px;
+}
+.s-text12 {
+  font-weight: bold;
+  font-family: "Montserrat";
+  color: #222;
+  line-height: 1.5;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding-top: 4px;
+}
+.checkout-bill {
+  display: flex;
+  justify-content: space-between;
+}
+.text1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+  margin: 2em 0;
+  font-family: "Montserrat", sans-serif;
+}

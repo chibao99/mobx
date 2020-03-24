@@ -16,9 +16,9 @@ import store from "../../app/store/store";
 import { observer } from "mobx-react-lite";
 
 const Checkout = () => {
-  const [txtTinh] = useState("");
+  const [txtTinh,setTinh] = useState("");
   const isChange = e => {
-    txtTinh(e.target.value);
+    setTinh(e.target.value);
   };
   const {perfumes} = useContext(store);
   const total = (product, quantity) => {
@@ -59,7 +59,6 @@ const Checkout = () => {
     return result;
   };
   var q = getQuan(txtTinh);
-  console.log(txtTinh);
   return (
     <div>
       <Container>
@@ -83,7 +82,8 @@ const Checkout = () => {
               </Form.Field>
               <Form.Group widths="equal">
                 <Form.Field>
-                  <select placeholder="Tỉnh/thành" onChange={e => isChange(e)}>
+                  <select  value={txtTinh} onChange={e => isChange(e)}>
+                    <option disabled selected value="">Tỉnh/thành</option>
                     {t.map((val, index) => {
                       return (
                         <option key={index} value={val}>
@@ -94,7 +94,16 @@ const Checkout = () => {
                   </select>
                 </Form.Field>
                 <Form.Field>
-                  {/* <Select placeholder="Quận/huyện" options="dd" /> */}
+                <select  value={txtTinh} onChange={e => isChange(e)}>
+                    <option disabled selected value="">Quận/huyện</option>
+                    {q.map((val, index) => {
+                      return (
+                        <option key={index} value={val}>
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </Form.Field>
               </Form.Group>
               <h4>Phương thức thanh toán:</h4>

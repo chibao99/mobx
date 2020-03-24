@@ -32,22 +32,18 @@ const CartItem = ({ cart }) => {
           {cart.quantity}
         </span>
         <Button.Group>
-          <a href="/cart">
             <Button
               onClick={() =>
                 removeAndUpdateProductOnCart(cart.product, cart.quantity - 1)
               }
               icon="minus"
             />
-          </a>
-          <a href="/cart">
             <Button
               onClick={() =>
                 removeAndUpdateProductOnCart(cart.product, cart.quantity + 1)
               }
               icon="plus"
             />
-          </a>
         </Button.Group>
       </Table.Cell>
       <Table.Cell>{total(cart.product.price, cart.quantity)}</Table.Cell>

@@ -36,45 +36,42 @@ class store {
     }
   ];
   onAddToCart = (product, quantity) => {
-    runInAction("add product to cart", () => {
-      index = findProductInCart(this.perfumes, product);
-      // if (index !== -1) {
-      //   this.perfumes[index].quantity += quantity;
-      // } else {
+    index = findProductInCart(this.perfumes, product);
+    if (index !== -1) {
+      this.perfumes[index].quantity += quantity;
+    } else {
       this.perfumes.push({ product, quantity });
-      // }
-      localStorage.setItem("CART", JSON.stringify(this.perfumes));
-      return [...this.perfumes];
-    });
+    }
+    localStorage.setItem("CART", JSON.stringify(this.perfumes));
+    return [...this.perfumes];
   };
   onDeleteToCart = product => {
-    runInAction("remove product to cart", () => {
-      index = this.findProductInCart(this.perfumes, product);
-      if (index !== -1) {
-        this.perfumes.splice(index, 1);
-      }
-      localStorage.setItem("CART", JSON.stringify(this.perfumes));
-      return [...this.perfumes];
-    });
+    index = findProductInCart(this.perfumes, product);
+    if (index !== -1) {
+      this.perfumes.splice(index, 1);
+    }
+    localStorage.setItem("CART", JSON.stringify(this.perfumes));
+    return [...this.perfumes];
   };
   onUpdateQuantity = (product, quantity) => {
-    runInAction("update quantity on cart", () => {
-      index = this.findProductInCart(this.perfumes, product);
-      if (index !== -1) {
-        this.perfumes[index].quantity = quantity;
-      }
-      localStorage.setItem("CART", JSON.stringify(this.perfumes));
-      return [...this.perfumes];
-    });
-  };
-  findProductInCart = (cart, product) => {
-    // tìm trên local store
-    let products = JSON.parse(localStorage.getItem("CART"));
-    if (products) {
-      const index = products.fi;
+    index = findProductInCart(this.perfumes, product);
+    if (index !== -1) {
+      this.perfumes[index].quantity = quantity;
     }
+    localStorage.setItem("CART", JSON.stringify(this.perfumes));
+    return [...this.perfumes];
   };
 }
+const findProductInCart = (cart, product) => {
+  var result = -1;
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].product.id == product.id) {
+      result = i;
+      break;
+    }
+  }
+  return result;
+};
 
 decorate(store, {
   products: observable,

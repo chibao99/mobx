@@ -1,53 +1,110 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 .info {
-  margin-top: 1em;
-  font-family: "Montserrat", sans-serif;
+    margin-top: 1em;
+    font-family: 'Montserrat', sans-serif;
 }
 .nameDetail {
-  font-size: 30px;
-  margin: 0.5em 0;
+    font-size: 30px;
+    margin: 0.5em 0;
 }
 .price {
-  font-size: 20px;
-  color: #999;
+    font-size: 20px;
+    color: #999;
 }
 .info-text {
-  margin-left: 5em;
+    margin-left: 5em;
 }
 .des {
-  font-size: 20px;
-  margin-bottom: 2em;
+    font-size: 20px;
+    margin-bottom: 2em;
 }
 .checkout-item {
-  display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid #e6e6e6;
-  padding-top: 10px;
-  padding-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #e6e6e6;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 .checkout-item img {
-  width: 45px;
-  min-width: 40px;
-  max-height: 70px;
+    width: 45px;
+    min-width: 40px;
+    max-height: 70px;
 }
 .s-text12 {
-  font-weight: bold;
-  font-family: "Montserrat";
-  color: #222;
-  line-height: 1.5;
-  text-transform: uppercase;
-  font-size: 15px;
-  padding-top: 4px;
+    font-weight: bold;
+    font-family: 'Montserrat';
+    color: #222;
+    line-height: 1.5;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-top: 4px;
 }
 .checkout-bill {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 .text1 {
-  font-size: 30px;
-  font-weight: bold;
-  color: #555;
-  text-align: center;
-  margin: 2em 0;
-  font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #555;
+    text-align: center;
+    margin: 2em 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.s-text3 {
+    font-size: 30px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin: 50px 0px;
+}
+.s-text4 {
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+.s-text5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #666;
+}
+/* css */
+
+.welcome {
+    font: 400 1em/1.5 'Neuton';
+    background: #090d00;
+    color: rgba(255, 255, 255, 0.25);
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    height: 50vh;
+    border-radius: 15px;
+}
+
+.title-wel {
+    font: 700 4em/1 'Oswald', sans-serif;
+    letter-spacing: 0;
+    padding: 0.25em 0 0.325em;
+    display: block;
+    padding-top: 10%;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+    /* Clip Background Image */
+    background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png)
+        repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Animate Background Image */
+    -webkit-text-fill-color: transparent;
+}
+input[type=checkbox]{
+    width: 16px;
+    height: 16px;
+}
+.checkStatus{
+    width: 100%;
+    text-align: center;
 }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ProductRelated = ({ product }) => {
   return (
     <Container>
-      <Link to={"/perfumes" + "/" + product.id}>
+      <Link to={`/perfumes/${product._id}`}>
         <Card
           style={{ margin: "2em 0" }}
           image={product.image}

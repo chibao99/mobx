@@ -15,7 +15,7 @@ const CartItem = ({ cart }) => {
       onUpdateQuantity(product, quantity);
       toast.info("Cập nhật giỏ hàng thành công!!!");
     }
-    if (quantity == 0) {
+    if (quantity === 0) {
       onDeleteToCart(product);
       toast.error("Xóa giỏ hàng thành công ");
     }

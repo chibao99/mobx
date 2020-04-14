@@ -43,7 +43,7 @@ const Detail = props => {
                   Description
                 </Header>
               </Divider>
-              {product.descripe}
+              {product.desc}
             </Item.Description>
           </Item.Content>
           <Button

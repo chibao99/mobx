@@ -14,14 +14,14 @@ class storeAPI {
 
     addProduct = async (product) => {
         try {
-            await callApi('products', 'POST', product).then((res) => res.data);
+            await callApi('products', 'POST', product);
         } catch (err) {
             return err.response.data.errors;
         }
     };
 
     onDeleteProduct = async (id) => {
-        await callApi(`products/${id}`, 'DELETE', null).then((res) => res.data);
+        await callApi(`products/${id}`, 'DELETE', null);
     };
 
     getProductById = async (id) => {
@@ -29,9 +29,7 @@ class storeAPI {
     };
 
     onUpdateProduct = async (product, id) => {
-        await callApi(`products/edit/${id}`, 'PUT', product).then(
-            (res) => res.data
-        );
+        await callApi(`products/edit/${id}`, 'PUT', product);
     };
     // Contact
     onGetContactApi = async () => {
@@ -43,15 +41,28 @@ class storeAPI {
     };
     // Delete contact
     onDeleteContact = async (id) => {
-        await callApi(`contact/${id}`, 'DELETE', null).then((res) => res.data);
+        await callApi(`contact/${id}`, 'DELETE', null);
     };
     // Add contact
     onAddContact = async (contact) => {
         try {
-            await callApi('contact', 'POST', contact).then((res) => res.data);
+            await callApi('contact', 'POST', contact);
         } catch (err) {
             console.log(err.response.data.errors);
         }
+    };
+    // Add checkout
+    onAddCheckout = async (checkout) => {
+        try {
+            await callApi('checkout', 'POST', checkout);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    // Get product by name
+    onGetProductByName = async (name) => {
+        return callApi(`products/search/${name}`, 'GET', null).then((res) => res.data);
     };
 }
 decorate(storeAPI, {

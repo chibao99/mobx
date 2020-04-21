@@ -15,6 +15,7 @@ import quan from '../Checkout/Address/quan_huyen.json';
 import store from '../../app/store/store';
 import { observer } from 'mobx-react-lite';
 import { toast } from 'react-toastify';
+import storeAPI from '../../app/store/storeAPI';
 
 const Checkout = () => {
     const [formData, setFormData] = useState({
@@ -28,12 +29,16 @@ const Checkout = () => {
     const { name, email, phone, address, city, district } = formData;
     const isChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
+
     const onSubmit = (e) => {
         e.preventDefault();
-        localStorage.removeItem('CART');
-        toast.success('Thanh toán thành công!!!')
+
+        // localStorage.removeItem('CART');
+        toast.success('Thanh toán thành công!!!');
     };
     const { perfumes } = useContext(store);
+    const { onAddCheckout } = useContext(storeAPI);
+    
     const total = (product, quantity) => {
         return product * quantity;
     };

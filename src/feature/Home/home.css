@@ -1,0 +1,52 @@
+.banner {
+    background-image: url('./image/hoang-hon.jpg');
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: 0 -250px;
+    background-attachment: fixed;
+    height: 60vh;
+}
+.content-banner p {
+    font-size: 50px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+    animation: title;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+@keyframes title {
+    0%{top:-20px}
+    100%{top:10px}
+}
+.content-banner button {
+    background-color: black;
+    color: violet;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid olive;
+    border-radius: 10px;
+    position: relative;
+    opacity: 0;
+    outline: none;
+    animation-name: button;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+
+    transition-property: transform;
+    transition-duration: 1s;
+}
+.content-banner button:hover{
+    transform: rotateY(180deg)
+}
+@keyframes button{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+/*Info*/

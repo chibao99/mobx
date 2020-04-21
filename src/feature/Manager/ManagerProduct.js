@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
-    Input,
     Table,
-    Label,
     Button,
     Form,
     Divider,
@@ -22,15 +20,17 @@ const ManagerProduct = () => {
         onDeleteProduct,
         getProductById,
         products,
+        onUpdateProduct,
     } = useContext(storeAPI);
     const [formData, setFormData] = useState({
+        id: '',
         name: '',
         image: '',
         price: '',
-        inventory: false,
+        inventory: '',
         desc: '',
     });
-    const { name, image, price, inventory, desc } = formData;
+    const { name, image, price, inventory, desc, id } = formData;
 
     const isChange = (e) => {
         let value =
@@ -44,9 +44,14 @@ const ManagerProduct = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        addProduct(formData);
-        refreshPage();
-        toast.success('Thêm mới thành công');
+        if (id) {
+            onUpdateProduct(formData, id);
+            refreshPage();
+        } else {
+            addProduct(formData);
+            refreshPage();
+            toast.success('Thêm mới thành công');
+        }
     };
     const changeStatus = () => {
         setDisplay(!display);
@@ -68,24 +73,15 @@ const ManagerProduct = () => {
 
     const getIdProduct = (id) => {
         getProductById(id).then((res) => {
-            console.log(res);
+            setFormData({
+                id: res[0]._id,
+                name: res[0].name,
+                price: res[0].price,
+                inventory: res[0].inventory,
+                desc: res[0].desc,
+            });
         });
-    };
-
-    const checkStatus = (status) => {
-        if (status === true) {
-            return (
-                <Label color='green' horizontal>
-                    Còn hàng
-                </Label>
-            );
-        } else {
-            return (
-                <Label color='red' horizontal>
-                    Hết hàng
-                </Label>
-            );
-        }
+        setDisplay(true);
     };
 
     const getColonFormatDate = (date) => date.toString().slice(0, 10);
@@ -118,22 +114,20 @@ const ManagerProduct = () => {
                             onChange={(e) => isChange(e)}
                             type='file'
                         />
-                        <TextArea
-                            name='desc'
-                            value={desc}
-                            onChange={(e) => isChange(e)}
-                            placeholder='Mô tả về sản phẩm'
-                        />
                         <Form.Field style={{ margin: '1em 0' }}>
-                            <Label color='purple' className='checkStatus'>
-                                <Input
-                                    type='checkbox'
-                                    name='inventory'
-                                    value={inventory}
-                                    onChange={(e) => isChange(e)}
-                                />
-                                Trạng thái hàng
-                            </Label>
+                            <Form.Input
+                                type='number'
+                                name='inventory'
+                                value={inventory}
+                                onChange={(e) => isChange(e)}
+                                placeholder='Nhập số lượng Sản Phẩm'
+                            />
+                            <TextArea
+                                name='desc'
+                                value={desc}
+                                onChange={(e) => isChange(e)}
+                                placeholder='Mô tả về sản phẩm'
+                            />
                         </Form.Field>
                         <Form.Field>
                             <Button
@@ -185,10 +179,10 @@ const ManagerProduct = () => {
                                     <Table.Cell>{index}</Table.Cell>
                                     <Table.Cell>{val.name}</Table.Cell>
                                     <Table.Cell>
-                                        {formatMonney(val.price)}  VND
+                                        {formatMonney(val.price)} VND
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {checkStatus(val.inventory)}
+                                        {val.inventory}
                                     </Table.Cell>
                                     <Table.Cell>
                                         {getColonFormatDate(val.date)}

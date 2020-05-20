@@ -4,26 +4,31 @@ import { Grid, Container, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Product from './Product';
 import { observer } from 'mobx-react-lite';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 
 const Products = ({ match }) => {
     const { url } = match;
-    const { getProductApi, products, onGetProductByName } = useContext(
-        storeAPI
-    );
+    // const x = useRouteMatch();
+    // console.log(x.url);
+    const {
+        getProductApi,
+        products,
+        catalogs,
+        getProductByCatalog,
+        productsByCatalog,
+    } = useContext(storeAPI);
     useEffect(() => {
         getProductApi();
-    }, [getProductApi]);
+    }, []);
 
-    const [all, setall] = useState([]);
+    const [all, setall] = useState(products);
 
-    const display = (name) => {
+    const display = (name, id) => {
         if (name === 'all') {
             setall(products);
         } else {
-            onGetProductByName(name).then((res) => {
-                setall(res);
-            });
+            getProductByCatalog(id);
+            setall(productsByCatalog);
         }
     };
 
@@ -32,44 +37,24 @@ const Products = ({ match }) => {
             <Button
                 style={{ marginRight: '4em', marginLeft: '3em' }}
                 color='red'
-                onClick={()=>display('all')}
+                onClick={() => display('all')}
             >
                 All
             </Button>
-            <Button
-                style={{ marginRight: '4em', marginLeft: '3em' }}
-                color='orange'
-                onClick={()=>display('Louis')}
-            >
-                Louis
-            </Button>
-            <Button
-                style={{ marginRight: '4em', marginLeft: '3em' }}
-                color='yellow'
-                onClick={()=>display('X-men')}
-            >
-                X-men
-            </Button>
-            <Button
-                style={{ marginRight: '4em', marginLeft: '3em' }}
-                color='olive'
-            >
-                Olive
-            </Button>
-            <Button
-                style={{ marginRight: '4em', marginLeft: '3em' }}
-                color='green'
-            >
-                Green
-            </Button>
-            <Button
-                style={{ marginRight: '4em', marginLeft: '3em' }}
-                color='teal'
-            >
-                Teal
-            </Button>
+            {catalogs.map((val, index) => {
+                return (
+                    <Button
+                        key={index}
+                        style={{ marginRight: '4em', marginLeft: '3em' }}
+                        color='orange'
+                        onClick={() => display(val.name, val._id)}
+                    >
+                        {val.name}
+                    </Button>
+                );
+            })}
             {
-                <Grid>
+                <Grid style={{ marginTop: '3em' }}>
                     {all.map((product, index) => {
                         return (
                             <NavLink key={index} to={`${url}/${product._id}`}>

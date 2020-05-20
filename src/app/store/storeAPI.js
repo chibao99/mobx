@@ -1,72 +1,107 @@
 import { decorate, observable, runInAction } from 'mobx';
 import { createContext } from 'react';
-import callApi from '../../Utils/apiCaller';
+import api from '../../app/api/agent';
 class storeAPI {
     products = [];
     contacts = [];
+    productsByCatalog = [];
+    catalogs = [];
     getProductApi = async () => {
-        return callApi('products', 'GET', null).then((res) => {
+        try {
+            const data = await api.Product.getAllProduct();
             runInAction(() => {
-                this.products = res.data;
+                this.products = data;
             });
-        });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     addProduct = async (product) => {
         try {
-            await callApi('products', 'POST', product);
+            await api.Product.addProduct(product);
         } catch (err) {
-            return err.response.data.errors;
+            console.log(err);
         }
     };
 
     onDeleteProduct = async (id) => {
-        await callApi(`products/${id}`, 'DELETE', null);
+        try {
+            await api.Product.deleteProduct(id);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     getProductById = async (id) => {
-        return callApi(`products/${id}`, 'GET', null).then((res) => res.data);
+        try {
+            return await api.Product.getProductById(id);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     onUpdateProduct = async (product, id) => {
-        await callApi(`products/edit/${id}`, 'PUT', product);
+        try {
+            await api.Product.updateProduct(id, product);
+        } catch (error) {
+            console.log(error);
+        }
     };
     // Contact
     onGetContactApi = async () => {
-        return callApi('contact', 'GET', null).then((res) =>
+        try {
+            const data = await api.Contact.getAllContact();
             runInAction(() => {
-                this.contacts = res.data;
-            })
-        );
+                this.contacts = data;
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
     // Delete contact
     onDeleteContact = async (id) => {
-        await callApi(`contact/${id}`, 'DELETE', null);
+        try {
+            await api.Contact.deleteContact(id);
+        } catch (error) {
+            console.log(error);
+        }
     };
     // Add contact
     onAddContact = async (contact) => {
         try {
-            await callApi('contact', 'POST', contact);
-        } catch (err) {
-            console.log(err.response.data.errors);
-        }
-    };
-    // Add checkout
-    onAddCheckout = async (checkout) => {
-        try {
-            await callApi('checkout', 'POST', checkout);
+            await api.Contact.addContact(contact);
         } catch (err) {
             console.log(err);
         }
     };
 
     // Get product by name
-    onGetProductByName = async (name) => {
-        return callApi(`products/search/${name}`, 'GET', null).then((res) => res.data);
+    getProductByCatalog = async (id) => {
+        try {
+            const data = await api.Product.getProductByCatalog(id);
+            runInAction(() => {
+                this.productsByCatalog = data;
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    onGetCatalog = async () => {
+        try {
+            const data = await api.Catalog.getAllCatalog();
+            runInAction(() => {
+                this.catalogs = data;
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 }
 decorate(storeAPI, {
     products: observable,
     contacts: observable,
+    productsByCatalog: observable,
+    catalogs: observable,
 });
 export default createContext(new storeAPI());

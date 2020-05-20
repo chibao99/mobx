@@ -32,8 +32,9 @@ const Checkout = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-
-        // localStorage.removeItem('CART');
+        //form data
+        //perfume
+        
         toast.success('Thanh toán thành công!!!');
     };
     const { perfumes } = useContext(store);

@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const items = [
     { to: '/perfumes', label: 'Nước Hoa' },
     { to: '/cart', label: 'Giỏ Hàng' },
-    { to: '/checkout', label: 'Thanh Toán' }
+    { to: '/checkout', label: 'Thanh Toán' },
 ];
 const App = () => {
     return (
@@ -22,7 +22,7 @@ const App = () => {
         </Router>
     );
 };
-const showRouter = routes => {
+const showRouter = (routes) => {
     var result = null;
     if (routes.length > 0) {
         result = routes.map((route, index) => {

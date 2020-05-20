@@ -18,7 +18,6 @@ const routes = [
         path: '/perfumes',
         exact: true,
         main: ({ match }) => <Products match={match} />,
-        label: 'Nước Hoa',
     },
     {
         path: '/perfumes/:id',

@@ -21,6 +21,8 @@ const ManagerProduct = () => {
         getProductById,
         products,
         onUpdateProduct,
+        catalogs,
+        onGetCatalog,
     } = useContext(storeAPI);
     const [formData, setFormData] = useState({
         id: '',
@@ -29,8 +31,9 @@ const ManagerProduct = () => {
         price: '',
         inventory: '',
         desc: '',
+        catalog: '',
     });
-    const { name, image, price, inventory, desc, id } = formData;
+    const { name, image, price, inventory, desc, id, catalog } = formData;
 
     const isChange = (e) => {
         let value =
@@ -52,6 +55,8 @@ const ManagerProduct = () => {
             refreshPage();
             toast.success('Thêm mới thành công');
         }
+        console.log(formData.image)
+
     };
     const changeStatus = () => {
         setDisplay(!display);
@@ -59,7 +64,8 @@ const ManagerProduct = () => {
 
     useEffect(() => {
         getProductApi();
-    }, [getProductApi]);
+        onGetCatalog();
+    }, []);
 
     const deleteProdust = (id) => {
         if (window.confirm('Bạn có chắc chắn muốn xóa không')) {
@@ -94,6 +100,24 @@ const ManagerProduct = () => {
             return (
                 <Segment raised style={{ margin: '1em' }}>
                     <Form onSubmit={(e) => onSubmit(e)}>
+                        <Form.Field>
+                            <select
+                                name='catalog'
+                                value={catalog}
+                                onChange={(e) => isChange(e)}
+                            >
+                                <option disabled value='' selected>
+                                    Loại sản phẩm
+                                </option>
+                                {catalogs.map((val, index) => {
+                                    return (
+                                        <option key={index} value={val._id}>
+                                            {val.name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </Form.Field>
                         <Form.Input
                             type='text'
                             name='name'
@@ -181,9 +205,7 @@ const ManagerProduct = () => {
                                     <Table.Cell>
                                         {formatMonney(val.price)} VND
                                     </Table.Cell>
-                                    <Table.Cell>
-                                        {val.inventory}
-                                    </Table.Cell>
+                                    <Table.Cell>{val.inventory}</Table.Cell>
                                     <Table.Cell>
                                         {getColonFormatDate(val.date)}
                                     </Table.Cell>

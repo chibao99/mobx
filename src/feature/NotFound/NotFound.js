@@ -1,18 +1,18 @@
-import React from "react";
-import "semantic-ui-css/semantic.min.css";
-import { Message, Icon, Container } from "semantic-ui-react";
+import React from 'react';
+import './style.css';
 const NotFound = () => {
-  return (
-    <Container style={{ marginTop: "3em" }}>
-      <Message icon>
-        <Icon name="circle notched" loading />
-        <Message.Content>
-          <Message.Header>404</Message.Header>
-          KHÔNG TÌM THẤY TRANG
-        </Message.Content>
-      </Message>
-    </Container>
-  );
+    return (
+        <div className='content-notfound'>
+            <div className='super-man'>
+                <img
+                    src='http://pngimg.com/uploads/superman/superman_PNG9.png'
+                />
+            </div>
+                <div className='title'>404!</div>
+                <p>The Page You're Looking For Was Not Found.</p>
+                <a className="goback" href="/">Go Back</a>
+            </div>
+    );
 };
 
 export default NotFound;

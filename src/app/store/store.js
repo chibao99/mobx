@@ -1,7 +1,7 @@
 import { observable, action, decorate, runInAction } from 'mobx';
 import { createContext } from 'react';
 let index = -1;
-var data = JSON.parse(localStorage.getItem('CART'));
+var data = JSON.parse(localStorage.getItem('CARTPERFUME'));
 
 class store {
     perfumes = data ? data : [];
@@ -15,7 +15,7 @@ class store {
             } else {
                 this.perfumes.push({ product, quantity });
             }
-            localStorage.setItem('CART', JSON.stringify(this.perfumes));
+            localStorage.setItem('CARTPERFUME', JSON.stringify(this.perfumes));
             return [...this.perfumes];
         });
     };
@@ -24,7 +24,7 @@ class store {
         if (index !== -1) {
             this.perfumes.splice(index, 1);
         }
-        localStorage.setItem('CART', JSON.stringify(this.perfumes));
+        localStorage.setItem('CARTPERFUME', JSON.stringify(this.perfumes));
         return [...this.perfumes];
     };
     onUpdateQuantity = (product, quantity) => {
@@ -32,7 +32,7 @@ class store {
         if (index !== -1) {
             this.perfumes[index].quantity = quantity;
         }
-        localStorage.setItem('CART', JSON.stringify(this.perfumes));
+        localStorage.setItem('CARTPERFUME', JSON.stringify(this.perfumes));
         return [...this.perfumes];
     };
 }
